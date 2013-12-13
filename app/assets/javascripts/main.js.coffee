@@ -1,13 +1,18 @@
 #put all functionality that declared controller may need, example: custom services
 
-#=require_self
-#=require_tree .controllers/
+#= require_self
+#= require_tree ./controllers/main
 
+Name = angular.module('Name', [])
 
-Name = angular.Module('Name', [])
+# Sets up routing
+Name.config(['$routeProvider', ($routeProvider) ->
+  # Route for '/name'
+  $routeProvider.when('/name', { templateUrl: '../assets/mainName.html', controller: 'NameCtrl' } )
+  # Default
+  $routeProvider.otherwise({ templateUrl: '../assets/mainIndex.html', controller: 'IndexCtrl' } )
 
-Name.config([ '$routeProvider', ($routeProvider) -> 
-
-  $routeProvider.when('name/:nameId', {templateUrl '../assets/mainName.html', controller: 'NameCtrl' })
-  $routeProvider.otherwise( {templateUrl '../assets/mainIndex.html', controller: 'IndexCtrl' })
 ])
+
+
+
